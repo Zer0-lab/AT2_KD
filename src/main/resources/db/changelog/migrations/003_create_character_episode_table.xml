@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="003-create-character-episode" author="kd">
+    <createTable tableName="character_episode">
+      <column name="character_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="episode_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addPrimaryKey
+      tableName="character_episode"
+      columnNames="character_id, episode_id"
+      constraintName="pk_character_episode"/>
+
+    <addForeignKeyConstraint
+      baseTableName="character_episode"
+      baseColumnNames="character_id"
+      constraintName="fk_character_episode_character"
+      referencedTableName="characters"
+      referencedColumnNames="id"/>
+
+    <addForeignKeyConstraint
+      baseTableName="character_episode"
+      baseColumnNames="episode_id"
+      constraintName="fk_character_episode_episode"
+      referencedTableName="episodes"
+      referencedColumnNames="id"/>
+  </changeSet>
+
+</databaseChangeLog>
